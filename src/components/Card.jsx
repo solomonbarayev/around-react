@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 
 const Card = (props) => {
+  const [likesCount, setLikesCount] = useState(0);
+
   function handleClick() {
     props.onCardClick(props.card);
   }
@@ -27,7 +29,7 @@ const Card = (props) => {
             type="button"
             aria-label="like card"
           ></button>
-          <span className="card__like-count"></span>
+          <span className="card__like-count">{likesCount}</span>
         </div>
       </div>
     </li>

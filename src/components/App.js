@@ -6,29 +6,29 @@ import ImagePopup from "./ImagePopup";
 import PopupWithForm from "./PopupWithForm";
 
 function App() {
-  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
-  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
-  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
-  const [isImagePreviewOpen, setImagePreviewOpen] = useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
+  const [isImagePreviewOpen, setIsImagePreviewOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({
     name: "",
     link: "",
   });
 
   const handleEditAvatarClick = () => {
-    setEditAvatarPopupOpen(true);
+    setIsEditAvatarPopupOpen(true);
   };
 
   const handleEditProfileClick = () => {
-    setEditProfilePopupOpen(true);
+    setIsEditProfilePopupOpen(true);
   };
 
   const handleAddPlaceClick = () => {
-    setAddPlacePopupOpen(true);
+    setIsAddPlacePopupOpen(true);
   };
 
   const handleCardClick = (card) => {
-    setImagePreviewOpen(true);
+    setIsImagePreviewOpen(true);
     setSelectedCard({
       name: card.name,
       link: card.link,
@@ -36,11 +36,14 @@ function App() {
   };
 
   const closeAllPopups = () => {
-    setAddPlacePopupOpen(false);
-    setEditAvatarPopupOpen(false);
-    setEditProfilePopupOpen(false);
-    setImagePreviewOpen(false);
-    setSelectedCard("");
+    setIsAddPlacePopupOpen(false);
+    setIsEditAvatarPopupOpen(false);
+    setIsEditProfilePopupOpen(false);
+    setIsImagePreviewOpen(false);
+    setSelectedCard({
+      name: "",
+      link: "",
+    });
   };
 
   return (
@@ -59,6 +62,7 @@ function App() {
         name="edit-profile"
         isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
+        buttonText="Save"
       >
         <fieldset className="form__fieldset">
           <div className="form__input-container">
@@ -88,11 +92,6 @@ function App() {
             <span className="form__input-error title-input-error"></span>
           </div>
         </fieldset>
-        <fieldset className="form__fieldset">
-          <button className="form__button" type="submit">
-            Save
-          </button>
-        </fieldset>
       </PopupWithForm>
 
       <PopupWithForm
@@ -100,6 +99,7 @@ function App() {
         name="add-place"
         isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
+        buttonText="Create"
       >
         <fieldset className="form__fieldset">
           <div className="form__input-container">
@@ -127,14 +127,6 @@ function App() {
             <span className="form__input-error place-url-input-error"></span>
           </div>
         </fieldset>
-        <fieldset className="form__fieldset">
-          <button
-            className="form__button form__button_type_place"
-            type="submit"
-          >
-            Create
-          </button>
-        </fieldset>
       </PopupWithForm>
 
       <PopupWithForm
@@ -142,6 +134,7 @@ function App() {
         name="avatar"
         isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
+        buttonText="Save"
       >
         <fieldset className="form__fieldset">
           <div className="form__input-container">
@@ -156,26 +149,13 @@ function App() {
             <span className="form__input-error avatar-input-error"></span>
           </div>
         </fieldset>
-        <fieldset className="form__fieldset">
-          <button
-            className="form__button form__button_type_avatar"
-            type="submit"
-          >
-            Save
-          </button>
-        </fieldset>
       </PopupWithForm>
 
-      <PopupWithForm title="Are you sure?" name="delete-card">
-        <fieldset className="form__fieldset">
-          <button
-            className="form__button form__button_type_delete-card"
-            type="submit"
-          >
-            Yes
-          </button>
-        </fieldset>
-      </PopupWithForm>
+      <PopupWithForm
+        title="Are you sure?"
+        name="delete-card"
+        buttonText="Yes"
+      />
 
       <ImagePopup
         card={selectedCard}
