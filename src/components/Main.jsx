@@ -23,7 +23,6 @@ const Main = (props) => {
     api
       .getInitialCards()
       .then((res) => {
-        console.log(res);
         setCards(res);
       })
       .catch(console.log);

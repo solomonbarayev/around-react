@@ -40,10 +40,10 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsImagePreviewOpen(false);
-    setSelectedCard({
-      name: "",
-      link: "",
-    });
+    // setSelectedCard({
+    //   name: "",
+    //   link: "",
+    // });
   };
 
   return (
