@@ -1,4 +1,4 @@
-# Project 10: Around The U.S.
+# Project 11: Around The U.S.
 
 ### Overview
 
@@ -14,7 +14,8 @@ All the elements are displayed correctly on popular screen sizes. The main skill
 
 ### Project features
 
-- React Frontend Development
+- ReactJS
+- React Hooks for Data Management - useState, useEffect, useRef, useContext
 - API Interaction
 - Javascript ES6 Classes
 - Webpack, Postcss, Babel
