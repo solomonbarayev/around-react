@@ -14,10 +14,6 @@ const EditProfilePopup = ({ isOpen, onClose, onUpdateUser, isLoading }) => {
     setDescription(currentUser.about);
   }, [currentUser]);
 
-  // const handleNameChange = (e) => {}
-  //   setName(e.target.value);
-  // };
-
   const handleNameChange = (e) => {
     setName(e.target.value);
   };
