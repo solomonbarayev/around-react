@@ -23,7 +23,7 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  setUserInfo(name, about) {
+  setUserInfo({ name, about }) {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
       method: "PATCH",
@@ -35,10 +35,6 @@ class Api {
   }
 
   setUserAvatar(url) {
-    // Send the following PATCH request to change the profile picture:
-    // PATCH https://around.nomoreparties.co/v1/groupId/users/me/avatar
-    // In the request body, pass the JSON with a single property, avatar. This property should contain a link to the new profile picture. In the case that anything other than a link is sent, the server will return an error.
-    // When the user hovers over their profile picture, the edit icon should appear on it:
     return fetch(`${this._baseUrl}/users/me/avatar`, {
       headers: this._headers,
       method: "PATCH",
@@ -63,18 +59,18 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  likeCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      headers: this._headers,
-      method: "PUT",
-    }).then(this._checkResponse);
-  }
-
-  dislikeCard(cardId) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
-      headers: this._headers,
-      method: "DELETE",
-    }).then(this._checkResponse);
+  changeLikeCardStatus(cardId, isLiked) {
+    if (!isLiked) {
+      return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+        headers: this._headers,
+        method: "PUT",
+      }).then(this._checkResponse);
+    } else {
+      return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+        headers: this._headers,
+        method: "DELETE",
+      }).then(this._checkResponse);
+    }
   }
 }
 

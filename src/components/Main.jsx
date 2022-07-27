@@ -1,64 +1,48 @@
-import React, { useState, useEffect } from "react";
-import { api } from "../utils/api";
+import React, { useContext } from "react";
 import Card from "./Card";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Main = (props) => {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([]);
+  const {
+    onCardClick,
+    onAddPlaceClick,
+    onEditProfileClick,
+    onEditAvatarClick,
+    cards,
+    onCardLike,
+    onDeleteButtonClick,
+  } = props;
 
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then((res) => {
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
-      })
-      .catch(console.log);
-  }, []);
-
-  useEffect(() => {
-    api
-      .getInitialCards()
-      .then((res) => {
-        setCards(res);
-      })
-      .catch(console.log);
-  }, []);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main className="content section">
       <div className="separator"></div>
       <section className="profile">
-        <div
-          className="profile__image-container"
-          onClick={props.onEditAvatarClick}
-        >
+        <div className="profile__image-container" onClick={onEditAvatarClick}>
           <img
-            src={userAvatar}
+            src={currentUser.avatar}
             alt="User's Profile"
             className="profile__image"
           />
         </div>
         <div className="profile__info">
           <div className="profile__person">
-            <h1 className="profile__name">{userName}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button
               className="profile__edit-button"
               type="button"
               aria-label="edit profile"
-              onClick={props.onEditProfileClick}
+              onClick={onEditProfileClick}
             ></button>
           </div>
-          <p className="profile__title">{userDescription}</p>
+          <p className="profile__title">{currentUser.about}</p>
         </div>
         <button
           className="profile__add-button"
           type="button"
           aria-label="add place"
-          onClick={props.onAddPlaceClick}
+          onClick={onAddPlaceClick}
         ></button>
       </section>
       <section className="cards">
@@ -68,7 +52,9 @@ const Main = (props) => {
               <Card
                 card={card}
                 key={card._id}
-                onCardClick={props.onCardClick}
+                onCardClick={onCardClick}
+                onLikeCard={onCardLike}
+                onDeleteButtonClick={onDeleteButtonClick}
               />
             );
           })}
